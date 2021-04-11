@@ -1,3 +1,15 @@
+# T Maze With Cues
+
+This is an environment to test the performance of various exploration modes (active learning, active inference). It extends MiniWorld.
+
+You can test the environment with the following command.
+```
+./manual_control.py --env-name MiniWorld-TMazeCue-v0
+```
+
+---
+(old repo readme appended for instructions etc. - eventually this should get merged with MiniWorld)
+
 # MiniWorld (gym-miniworld)
 
 [![Build Status](https://travis-ci.org/maximecb/gym-miniworld.svg?branch=master)](https://travis-ci.org/maximecb/gym-miniworld)
