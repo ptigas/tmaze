@@ -68,12 +68,10 @@ class TMazeCue(MiniWorldEnv):
         )
 
     def step(self, action):
-
         obs, reward, done, info = super().step(action)
 
         if self.near(self.cue):
             if self.latent_reward == LOW_REWARD:
-                print(self.latent_reward)
                 self.entities.append(ImageFrame(
                     pos=[-1, 1.35, 0],
                     dir=0,
