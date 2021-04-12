@@ -30,7 +30,6 @@ class TMazeCue(MiniWorldEnv):
         self.action_space = spaces.Discrete(self.actions.move_forward+1)
 
     def _gen_world(self):
-        print('generating new world')
         room1 = self.add_rect_room(
             min_x=-1, max_x=8,
             min_z=-2, max_z=2
