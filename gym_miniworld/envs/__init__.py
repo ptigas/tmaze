@@ -8,6 +8,7 @@ from .roomobjs import *
 from .pickupobjs import *
 from .tmaze import *
 from .tmazecue import *
+from .treasurescue import *
 from .ymaze import *
 from .maze import *
 from .fourrooms import *
