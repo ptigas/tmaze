@@ -3,6 +3,7 @@ import math
 from gym import spaces
 from ..miniworld import MiniWorldEnv, Room
 from ..entity import Box, Ball, Key
+from ..entity import MeshEnt, ImageFrame
 
 LOW_REWARD = -100
 MID_REWARD = 10
@@ -45,12 +46,16 @@ class TreasuresCue(MiniWorldEnv):
             self.latent_reward = HIGH_REWARD
 
         self.deterministic_goal = Box(color='blue')
-        self.stochastic_goal = Box(color='purple')
-        self.cue = Box(color='grey')
+        self.stochastic_goal = Box(color='grey')
+        self.cue =  MeshEnt(
+            mesh_name='duckie',
+            height=1,
+            static=False
+        )
 
-        self.place_entity(self.deterministic_goal)
-        self.place_entity(self.stochastic_goal)
-        self.place_entity(self.cue)
+        self.place_entity(self.deterministic_goal, pos=[1, 0, 1], dir=0)
+        self.place_entity(self.cue, pos=[3, 0, 1], dir=66/14)
+        self.place_entity(self.stochastic_goal, pos=[5, 0, 1], dir=0)
 
         self.place_agent()
 
@@ -61,19 +66,9 @@ class TreasuresCue(MiniWorldEnv):
 
         if self.near(self.cue):
             if self.latent_reward == LOW_REWARD:
-                self.entities.append(ImageFrame(
-                    pos=[-1, 1.35, 0],
-                    dir=0,
-                    width=1.8,
-                    tex_name='reward_low'
-                ))
+                self.stochastic_goal.color_vec = np.array([1.0, 0.0, 0.0])
             else:
-                self.entities.append(ImageFrame(
-                    pos=[-1, 1.35, 0],
-                    dir=0,
-                    width=1.8,
-                    tex_name='reward_high'
-                ))
+                self.stochastic_goal.color_vec = np.array([0.0, 1.0, 0.0])
             self._render_static()
 
         if self.near(self.deterministic_goal):
