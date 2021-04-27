@@ -5,7 +5,7 @@ from ..entity import Box
 from ..entity import MeshEnt, ImageFrame
 from gym import spaces
 
-LOW_REWARD = -1
+LOW_REWARD = -100
 MID_REWARD = 10
 HIGH_REWARD = 100
 
