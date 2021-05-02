@@ -5,9 +5,6 @@ from ..miniworld import MiniWorldEnv, Room
 from ..entity import Box, Ball, Key
 from ..entity import MeshEnt, ImageFrame
 
-LOW_REWARD = -100
-MID_REWARD = 10
-HIGH_REWARD = 100
 
 class TreasuresCue(MiniWorldEnv):
     """
@@ -15,10 +12,15 @@ class TreasuresCue(MiniWorldEnv):
     each object. Objects disappear when picked up.
     """
 
-    def __init__(self, size=6, num_objs=5, **kwargs):
+    def __init__(self,
+                 size=6,
+                 num_objs=5,
+                 rewards={'low':5, 'mid': 10, 'high': 100},
+                 **kwargs):
         assert size >= 2
         self.size = size
         self.num_objs = num_objs
+        self.rewards = rewards
 
         super().__init__(
             max_episode_steps=400,
@@ -41,9 +43,9 @@ class TreasuresCue(MiniWorldEnv):
 
         # sample a reward
         if self.rand.bool():
-            self.latent_reward = LOW_REWARD
+            self.latent_reward = self.rewards['low']
         else:
-            self.latent_reward = HIGH_REWARD
+            self.latent_reward = self.rewards['high']
 
         self.deterministic_goal = Box(color='blue')
         self.stochastic_goal = Box(color='grey')
@@ -65,7 +67,7 @@ class TreasuresCue(MiniWorldEnv):
         obs, reward, done, info = super().step(action)
 
         if self.near(self.cue):
-            if self.latent_reward == LOW_REWARD:
+            if self.latent_reward == self.rewards['low']:
                 self.stochastic_goal.color_vec = np.array([1.0, 0.0, 0.0])
             else:
                 self.stochastic_goal.color_vec = np.array([0.0, 1.0, 0.0])

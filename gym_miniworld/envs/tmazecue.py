@@ -17,9 +17,11 @@ class TMazeCue(MiniWorldEnv):
     def __init__(
         self,
         goal_pos=None,
+        rewards={'low':5, 'mid': 10, 'high': 100},
         **kwargs
     ):
         self.goal_pos = goal_pos
+        self.rewards = rewards
 
         super().__init__(
             max_episode_steps=280,
@@ -42,9 +44,9 @@ class TMazeCue(MiniWorldEnv):
 
         # sample a reward
         if self.rand.bool():
-            self.latent_reward = LOW_REWARD
+            self.latent_reward = self.rewards['low']
         else:
-            self.latent_reward = HIGH_REWARD
+            self.latent_reward = self.rewards['high']
 
         # Add a box at a random end of the hallway
         self.cue = MeshEnt(
@@ -70,7 +72,7 @@ class TMazeCue(MiniWorldEnv):
         obs, reward, done, info = super().step(action)
 
         if self.near(self.cue):
-            if self.latent_reward == LOW_REWARD:
+            if self.latent_reward == self.rewards['low']:
                 self.entities.append(ImageFrame(
                     pos=[-1, 1.35, 0],
                     dir=0,
