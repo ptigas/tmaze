@@ -18,15 +18,13 @@ class TMazeCue(MiniWorldEnv):
         self,
         goal_pos=None,
         rewards={'low':5, 'mid': 10, 'high': 100},
+        max_episode_steps=280,
         **kwargs
     ):
         self.goal_pos = goal_pos
         self.rewards = rewards
 
-        super().__init__(
-            max_episode_steps=280,
-            **kwargs
-        )
+        super().__init__(**kwargs)
 
         # Allow only movement actions (left/right/forward)
         self.action_space = spaces.Discrete(self.actions.move_forward+1)

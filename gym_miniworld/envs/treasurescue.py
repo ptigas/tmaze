@@ -16,16 +16,14 @@ class TreasuresCue(MiniWorldEnv):
                  size=6,
                  num_objs=5,
                  rewards={'low':5, 'mid': 10, 'high': 100},
+                 max_episode_steps=400,
                  **kwargs):
         assert size >= 2
         self.size = size
         self.num_objs = num_objs
         self.rewards = rewards
 
-        super().__init__(
-            max_episode_steps=400,
-            **kwargs
-        )
+        super().__init__(**kwargs)
 
         # Reduce the action space
         self.action_space = spaces.Discrete(self.actions.pickup+1)
