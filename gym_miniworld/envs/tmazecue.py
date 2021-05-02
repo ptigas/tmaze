@@ -87,7 +87,7 @@ class TMazeCue(MiniWorldEnv):
             self._render_static()
 
         if self.near(self.deterministic_goal):
-            reward += MID_REWARD
+            reward += self.rewards['mid']
             done = True
 
         if self.near(self.stochastic_goal):
