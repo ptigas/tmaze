@@ -18,12 +18,12 @@ class Preference(MiniWorldEnv):
 
     def __init__(self, map=None, **kwargs):
         if map is None:
-            self.map = map
+            self._map = map
         else:
-            self.map = ['SHHS',
-                        'HHSH',
-                        'SPHH',
-                        'SSHH']
+            self._map = ['SHHS',
+                         'HHSH',
+                         'SPHH',
+                         'SSHH']
 
         super().__init__(
             **kwargs
@@ -42,9 +42,9 @@ class Preference(MiniWorldEnv):
         self._room = []
         self._rewards = []
 
-        for x in range(len(self.map)):
-            for y in range(len(self.map[0])):
-                print(textures[self.map[x][y]])
+        for x in range(len(self._map)):
+            for y in range(len(self._map[0])):
+                print(textures[self._map[x][y]])
                 if self.map[x][y] == 'P':
                     agent_pos = [x, y]
 
@@ -52,14 +52,14 @@ class Preference(MiniWorldEnv):
                     min_x=x*self.size, max_x=x*self.size + self.size,
                     min_z=y*self.size, max_z=y*self.size + self.size,
                     wall_height=0,
-                    floor_tex=textures[self.map[x][y]]
+                    floor_tex=textures[self._map[x][y]]
                 )
-                room.type = self.map[x][y]
+                room.type = self._map[x][y]
                 self._room.append(room)
 
         room = self.add_rect_room(
-            min_x=0, max_x=len(self.map)*self.size,
-            min_z=0, max_z=len(self.map[0])*self.size,
+            min_x=0, max_x=len(self._map)*self.size,
+            min_z=0, max_z=len(self._map[0])*self.size,
             floor_tex=None
         )
 
