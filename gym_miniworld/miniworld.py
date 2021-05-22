@@ -241,15 +241,17 @@ class Room:
 
         # Load the textures and do texture randomization
         self.wall_tex = Texture.get(self.wall_tex_name, rng)
-        self.floor_tex = Texture.get(self.floor_tex_name, rng)
         self.ceil_tex = Texture.get(self.ceil_tex_name, rng)
 
         # Generate the floor vertices
         self.floor_verts = self.outline
-        self.floor_texcs = gen_texcs_floor(
-            self.floor_tex,
-            self.floor_verts
-        )
+
+        if self.floor_tex_name is not None:
+            self.floor_tex = Texture.get(self.floor_tex_name, rng)
+            self.floor_texcs = gen_texcs_floor(
+                self.floor_tex,
+                self.floor_verts
+            )
 
         # Generate the ceiling vertices
         # Flip the ceiling vertex order because of backface culling
@@ -395,13 +397,14 @@ class Room:
         glColor3f(1, 1, 1)
 
         # Draw the floor
-        self.floor_tex.bind()
-        glBegin(GL_POLYGON)
-        glNormal3f(0, 1, 0)
-        for i in range(self.floor_verts.shape[0]):
-            glTexCoord2f(*self.floor_texcs[i, :])
-            glVertex3f(*self.floor_verts[i, :])
-        glEnd()
+        if hasattr(self, 'floor_tex'):
+            self.floor_tex.bind()
+            glBegin(GL_POLYGON)
+            glNormal3f(0, 1, 0)
+            for i in range(self.floor_verts.shape[0]):
+                glTexCoord2f(*self.floor_texcs[i, :])
+                glVertex3f(*self.floor_verts[i, :])
+            glEnd()
 
         # Draw the ceiling
         if not self.no_ceiling:
