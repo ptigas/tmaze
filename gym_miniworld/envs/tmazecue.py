@@ -18,7 +18,6 @@ class TMazeCue(MiniWorldEnv):
         self,
         goal_pos=None,
         rewards={'low':5, 'mid': 10, 'high': 100},
-        max_episode_steps=280,
         **kwargs
     ):
         self.goal_pos = goal_pos

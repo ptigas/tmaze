@@ -18,7 +18,6 @@ class Preference(MiniWorldEnv):
 
     def __init__(self, map=None, **kwargs):
         super().__init__(
-            max_episode_steps=250,
             **kwargs
         )
 
