@@ -44,7 +44,6 @@ class Preference(MiniWorldEnv):
 
         for x in range(len(self._map)):
             for y in range(len(self._map[0])):
-                print(textures[self._map[x][y]])
                 if self._map[x][y] == 'P':
                     agent_pos = [x, y]
 
@@ -76,6 +75,5 @@ class Preference(MiniWorldEnv):
         for i, room in enumerate(self._room):
             if x > room.min_x and x <= room.max_x and z > room.min_z and z <= room.max_z:
                 reward = self.rewards[room.type]
-        print(reward)
 
         return obs, reward, done, info
