@@ -17,10 +17,6 @@ def pointInRect(point, rect):
 class Preference(MiniWorldEnv):
 
     def __init__(self, map=None, **kwargs):
-        super().__init__(
-            **kwargs
-        )
-
         if map is None:
             self.map = map
         else:
@@ -28,6 +24,10 @@ class Preference(MiniWorldEnv):
                         'HHSH',
                         'SPHH',
                         'SSHH']
+
+        super().__init__(
+            **kwargs
+        )
 
         # Allow only movement actions (left/right/forward)
         self.action_space = spaces.Discrete(self.actions.move_forward+1)
