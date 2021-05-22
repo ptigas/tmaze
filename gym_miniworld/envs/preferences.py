@@ -45,7 +45,7 @@ class Preference(MiniWorldEnv):
         for x in range(len(self._map)):
             for y in range(len(self._map[0])):
                 print(textures[self._map[x][y]])
-                if self.map[x][y] == 'P':
+                if self._map[x][y] == 'P':
                     agent_pos = [x, y]
 
                 room = self.add_rect_room(
