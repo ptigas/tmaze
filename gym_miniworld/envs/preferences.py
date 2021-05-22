@@ -17,7 +17,7 @@ def pointInRect(point, rect):
 class Preference(MiniWorldEnv):
 
     def __init__(self, map=None, **kwargs):
-        if map is None:
+        if map is not None:
             self._map = map
         else:
             self._map = ['SHHS',
