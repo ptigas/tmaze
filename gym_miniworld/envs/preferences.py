@@ -93,7 +93,6 @@ class Preference(MiniWorldEnv):
 
         self.steps += 1
         if self.steps > 0 and self.reset_every > 0 and (self.steps%self.reset_every) == 0:
-            print('uuuuuuuu')
             self.steps = 0
             N = len(self._map)
             self.update_map(np.random.choice(['S','H'], N**2).reshape(N, N) if self.random_map else self._map)
