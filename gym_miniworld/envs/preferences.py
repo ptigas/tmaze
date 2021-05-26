@@ -16,7 +16,7 @@ def pointInRect(point, rect):
 
 class Preference(MiniWorldEnv):
 
-    def __init__(self, map=None, **kwargs):
+    def __init__(self, map=None, reset_every=0, **kwargs):
         if map is not None:
             self._map = map
         else:
@@ -27,7 +27,7 @@ class Preference(MiniWorldEnv):
 
         self.textures = {'S':'reward_high', 'H':'reward_low', 'P': 'reward_low'}
         self.rewards = {'S': 0, 'H': 1, 'P': 0}
-        self.reset_every = kwargs.get('reset_every', 0)
+        self.reset_every = reset_every
 
         super().__init__(
             **kwargs
